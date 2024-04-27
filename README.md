@@ -1,2 +1,2 @@
 # Python
-This space is used to create small programs and mini projects
+This space is used for DSA Algo in Python!!
