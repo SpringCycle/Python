@@ -35,6 +35,7 @@
 
 #Construct a library where people can borrow and return books, keep track of books
 
+
 from collections import defaultdict
 
 
@@ -47,62 +48,68 @@ auditofuser=defaultdict(list)
 
 while True:
     username=input("Enter the Username")
-    action = input("Do you want to borrow or return a book? (borrow/return): ").strip().lower()
+    action = input("Do you want to borrow or return a book? (b/r): ").strip().lower()
 
-    if action == "borrow":
-        borrow_book = input("Enter the book you need to borrow")
+    if action == "b":
+        borrow_book = input("Enter the edition you need to borrow")
         print("Available books : ",available_editions.get(borrow_book))
 
 
         if borrow_book=="fundaments of CS" and available_editions.get(borrow_book)>0:
             print(username,"have borrowed : ",borrow_book)
-            available_editions.get(borrow_book)= available_editions.get(borrow_book)-1
+            available_editions[borrow_book]= available_editions.get(borrow_book)-1
             auditofuser[username].append(borrow_book)
 
 
-        elif borrow_book=="Biochemical" and numberofbooks<=available_editions.get(borrow_book):
+        elif borrow_book=="Biochemical" and available_editions.get(borrow_book)>0:
             print(username,"have borrowed : ",borrow_book)
-            available_editions.get(borrow_book)= available_editions.get(borrow_book)-1
-            auditofuser[username]+=1
+            available_editions[borrow_book]= available_editions.get(borrow_book)-1
+            auditofuser[username].append(borrow_book)
 
-        elif borrow_book=="DSA" and numberofbooks<=available_editions.get(borrow_book):
+        elif borrow_book=="DSA" and available_editions.get(borrow_book)>0:
             print(username,"have borrowed : ",borrow_book)
-            available_editions.get(borrow_book)= available_editions.get(borrow_book)-1
-            auditofuser[username]+=1
+            available_editions[borrow_book]= available_editions.get(borrow_book)-1
+            auditofuser[username].append(borrow_book)
 
-        elif borrow_book=="SystemDesign" and numberofbooks<=available_editions.get(borrow_book):
+        elif borrow_book=="SystemDesign"and available_editions.get(borrow_book)>0:
             print(username,"have borrowed : ",borrow_book)
-            available_editions.get(borrow_book)= available_editions.get(borrow_book)-1
-            auditofuser[username]+=1
+            available_editions[borrow_book]= available_editions.get(borrow_book)-1
+            auditofuser[username].append(borrow_book)
         else :
             print("books are out of supply, will keep you posted!!")
 
-    elif action == "return" :
+    elif action == "r" :
 
         return_book = input("Enter the book you need to return")
     
         if return_book=="fundaments of CS":
             print(username,"You have returned : ",return_book)
             available_editions[return_book]+=1
-            auditofuser[username]-=1
+            auditofuser[username].remove(return_book)
+            print(available_editions)
             print(auditofuser)
 
         elif return_book=="Biochemical" :
             print(username,"You have returned : ",return_book)
             available_editions[return_book]+=1
-            auditofuser[username]-=1
+            auditofuser[username].remove(return_book)
+            print(available_editions)
             print(auditofuser)
 
         elif return_book=="DSA":
            print(username,"You have returned : ",return_book)
            available_editions[return_book]+=1
-           auditofuser[username]-=1
+           auditofuser[username].remove(return_book)
+           print(available_editions)
            print(auditofuser)
 
         elif return_book=="SystemDesign":
             print(username,"You have returned : ",return_book)
             available_editions[return_book]+=1
-            auditofuser[username]-=1
+            auditofuser[username].remove(return_book)
+            print(available_editions)
             print(auditofuser)
+
+    
 
     
